@@ -14,7 +14,6 @@ const Dashboard = () => {
     reviews,
     analytics,
     loading,
-    lastBooked,
     user,
     activeTab,
     holidayMod,
