@@ -1,0 +1,110 @@
+.stats-bar {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1.25rem;
+  margin-bottom: 2rem;
+}
+
+.stat-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--glass-border);
+  border-radius: 14px;
+  padding: 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.stat-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--border-color-hover);
+  box-shadow: 0 8px 24px rgba(99, 102, 241, 0.1);
+  background: var(--bg-card-hover);
+}
+
+.stat-card.stat-pct {
+  grid-column: span 2;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 12px;
+}
+
+@media (max-width: 768px) {
+  .stat-card.stat-pct { grid-column: span 1; }
+}
+
+.stat-icon {
+  font-size: 1.75rem;
+  line-height: 1;
+  width: 48px;
+  height: 48px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s;
+}
+
+.stat-card:hover .stat-icon {
+  transform: scale(1.08);
+}
+
+.stat-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.stat-value {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--text-main);
+  line-height: 1.1;
+  font-family: var(--font-heading);
+}
+
+.stat-label {
+  font-size: 12px;
+  color: var(--text-muted);
+  font-weight: 500;
+  margin-top: 3px;
+  letter-spacing: 0.01em;
+}
+
+.stat-occupancy-label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.pct-value {
+  font-weight: 700;
+  color: #a5b4fc;
+  font-size: 15px;
+  font-family: var(--font-heading);
+}
+
+.occupancy-bar {
+  height: 10px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 99px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+.occupancy-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #6366f1, #8b5cf6, #10b981);
+  border-radius: 99px;
+  transition: width 0.75s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 0 10px rgba(139, 92, 246, 0.5);
+}
+
