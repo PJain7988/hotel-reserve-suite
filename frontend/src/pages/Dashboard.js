@@ -177,19 +177,6 @@ const Dashboard = () => {
             <StatsBar />
             <div className="dashboard-grid">
               <div className="col-left">
-                {/* PRICING MENU CATALOG */}
-                <div className="booking-form-card glass-panel" style={{ padding: '1.25rem 1.5rem', marginBottom: '1.25rem', background: 'linear-gradient(145deg, rgba(30,30,40,0.8) 0%, rgba(20,20,30,0.9) 100%)', border: '1px solid rgba(255,255,255,0.05)' }}>
-                  <h3 style={{ fontSize: '15px', color: '#fff', marginBottom: '12px', borderBottom: '1px solid rgba(255,255,255,0.1)', paddingBottom: '8px' }}>📋 Enterprise Pricing Catalog</h3>
-                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px', fontSize: '12px', color: '#a5b4fc' }}>
-                    <div style={{ display: 'flex', justifyContent: 'space-between', padding: '6px', background: 'rgba(0,0,0,0.3)', borderRadius: '6px' }}><span>Standard Tier</span> <span style={{ color: '#10b981' }}>Base $100</span></div>
-                    <div style={{ display: 'flex', justifyContent: 'space-between', padding: '6px', background: 'rgba(0,0,0,0.3)', borderRadius: '6px' }}><span>Deluxe Tier</span> <span style={{ color: '#10b981' }}>Base $150</span></div>
-                    <div style={{ display: 'flex', justifyContent: 'space-between', padding: '6px', background: 'rgba(0,0,0,0.3)', borderRadius: '6px' }}><span>VIP Suite</span> <span style={{ color: '#10b981' }}>Base $250</span></div>
-                    <div style={{ display: 'flex', justifyContent: 'space-between', padding: '6px', background: 'rgba(0,0,0,0.3)', borderRadius: '6px' }}><span>AC / Amenities</span> <span style={{ color: '#10b981' }}>Varies</span></div>
-                    <div style={{ display: 'flex', justifyContent: 'space-between', padding: '6px', background: 'rgba(0,0,0,0.3)', borderRadius: '6px' }}><span>Holiday Surge</span> <span style={{ color: '#f43f5e' }}>+ 30% / night</span></div>
-                    <div style={{ display: 'flex', justifyContent: 'space-between', padding: '6px', background: 'rgba(0,0,0,0.3)', borderRadius: '6px' }}><span>Govt. Tax (GST)</span> <span style={{ color: '#f43f5e' }}>18% applied</span></div>
-                  </div>
-                </div>
-
                 {/* ADVANCED BOOKING OPTION PANEL */}
                 <div className="booking-form-card glass-panel" style={{ padding: '1.25rem 1.5rem', marginBottom: '0rem' }}>
                   <h3 style={{ fontSize: '15px', color: '#fff', marginBottom: '12px' }}>⚙️ Smart Clustering Controls</h3>
@@ -233,6 +220,20 @@ const Dashboard = () => {
                 <div className="floor-map-container">
                   <FloorMap />
                 </div>
+                
+                {/* PRICING MENU CATALOG */}
+                <div className="booking-form-card glass-panel" style={{ padding: '1.25rem 1.5rem', marginTop: '1.25rem', background: 'linear-gradient(145deg, rgba(30,30,40,0.8) 0%, rgba(20,20,30,0.9) 100%)', border: '1px solid rgba(255,255,255,0.05)' }}>
+                  <h3 style={{ fontSize: '15px', color: '#fff', marginBottom: '12px', borderBottom: '1px solid rgba(255,255,255,0.1)', paddingBottom: '8px' }}>📋 Enterprise Pricing Catalog</h3>
+                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px', fontSize: '12px', color: '#a5b4fc' }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', padding: '6px', background: 'rgba(0,0,0,0.3)', borderRadius: '6px' }}><span>Standard Tier</span> <span style={{ color: '#10b981' }}>Base $100</span></div>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', padding: '6px', background: 'rgba(0,0,0,0.3)', borderRadius: '6px' }}><span>Deluxe Tier</span> <span style={{ color: '#10b981' }}>Base $150</span></div>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', padding: '6px', background: 'rgba(0,0,0,0.3)', borderRadius: '6px' }}><span>VIP Suite</span> <span style={{ color: '#10b981' }}>Base $250</span></div>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', padding: '6px', background: 'rgba(0,0,0,0.3)', borderRadius: '6px' }}><span>AC / Amenities</span> <span style={{ color: '#10b981' }}>Varies</span></div>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', padding: '6px', background: 'rgba(0,0,0,0.3)', borderRadius: '6px' }}><span>Holiday Surge</span> <span style={{ color: '#f43f5e' }}>+ 30% / night</span></div>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', padding: '6px', background: 'rgba(0,0,0,0.3)', borderRadius: '6px' }}><span>Govt. Tax (GST)</span> <span style={{ color: '#f43f5e' }}>18% applied</span></div>
+                  </div>
+                </div>
+
               </div>
             </div>
           </>
