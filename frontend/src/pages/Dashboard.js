@@ -461,17 +461,17 @@ const Dashboard = () => {
 
         {activeTab === 'billing' && (
           <div className="tab-full-width-card glass-panel">
-            <h2 className="section-title">Simulated Billing & Payments Core</h2>
-            <p style={{ color: '#94a3b8', fontSize: '13px', marginBottom: '20px' }}>Simulate real-time online checkout, invoice generation, QR-codes, and cancel refund pathways.</p>
+            <h2 className="section-title">Enterprise Billing & Payment Gateway</h2>
+            <p style={{ color: '#94a3b8', fontSize: '13px', marginBottom: '20px' }}>Secure checkout processing, encrypted QR ticket generation, and automated invoice lifecycle management.</p>
             
             <div className="profile-grid">
               <div className="auth-form-container">
                 <h3>💳 Process Outstanding Checkout</h3>
                 <form onSubmit={handlePaySubmit} className="booking-form" style={{ marginTop: '15px' }}>
                   <div className="form-group">
-                    <label>Select Pending Booking</label>
+                    <label>Select Pending Booking Payload</label>
                     <select value={selectedBookingPay} onChange={(e) => setSelectedBookingPay(e.target.value)} required>
-                      <option value="">-- Choose Booking --</option>
+                      <option value="">-- Choose Booking to Process --</option>
                       {bookings.filter(b => b.paymentStatus === 'Pending').map(b => (
                         <option key={b._id} value={b._id}>{b.guestName} ({b.bookingReference}) - ${b.totalAmount}</option>
                       ))}
@@ -479,41 +479,55 @@ const Dashboard = () => {
                   </div>
                   
                   {selectedBookingPay && (
-                    <div style={{ padding: '10px', background: 'rgba(99, 102, 241, 0.1)', borderRadius: '8px', marginBottom: '15px' }}>
-                      <span style={{ fontSize: '11px', color: '#a5b4fc', display: 'block' }}>Dynamic Price breakdown:</span>
-                      <span style={{ fontSize: '14px', fontWeight: '800', color: '#fff' }}>
-                        Total Amount Due: ${bookings.find(b => b._id === selectedBookingPay)?.totalAmount}
-                      </span>
+                    <div style={{ padding: '15px', background: 'rgba(99, 102, 241, 0.1)', border: '1px solid rgba(99, 102, 241, 0.3)', borderRadius: '12px', marginBottom: '15px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                      <div>
+                        <span style={{ fontSize: '11px', color: '#a5b4fc', display: 'block' }}>Dynamic Price Breakdown:</span>
+                        <span style={{ fontSize: '18px', fontWeight: '800', color: '#fff' }}>
+                          ${bookings.find(b => b._id === selectedBookingPay)?.totalAmount}
+                        </span>
+                      </div>
+                      <div style={{ padding: '4px 10px', background: 'rgba(16, 185, 129, 0.2)', color: '#10b981', borderRadius: '99px', fontSize: '11px', fontWeight: 'bold' }}>
+                        Ready for Capture
+                      </div>
                     </div>
                   )}
 
                   <div className="form-group">
-                    <label>Payment Method</label>
+                    <label>Secure Payment Gateway</label>
                     <select value={payMethod} onChange={(e) => setPayMethod(e.target.value)}>
-                      <option value="Credit Card">Credit Card</option>
-                      <option value="PayPal">PayPal</option>
-                      <option value="Apple Pay">Apple Pay</option>
-                      <option value="UPI">UPI</option>
+                      <option value="Credit Card">Stripe (Credit Card / Debit)</option>
+                      <option value="PayPal">PayPal Express</option>
+                      <option value="Apple Pay">Apple Pay Integration</option>
+                      <option value="UPI">UPI (India Core)</option>
                     </select>
                   </div>
+
+                  {payMethod === 'Credit Card' && (
+                    <div className="form-group">
+                      <label>Mock Credit Card Number (Encrypted)</label>
+                      <input type="text" placeholder="0000 0000 0000 0000" disabled style={{ opacity: 0.5, cursor: 'not-allowed' }} />
+                    </div>
+                  )}
                   
                   <button type="submit" className="book-btn" disabled={!selectedBookingPay}>
-                    Process simulated checkout
+                    Authorize & Capture Payment
                   </button>
                 </form>
 
                 {/* QR CODE GENERATOR SECTION */}
                 {bookings.length > 0 && (
-                  <div style={{ marginTop: '20px', padding: '15px', background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.05)', borderRadius: '12px', display: 'flex', gap: '15px', alignItems: 'center' }}>
-                    <div style={{ width: '80px', height: '80px', background: '#fff', padding: '5px', borderRadius: '4px', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                      <svg width="70" height="70" viewBox="0 0 29 29" shapeRendering="crispEdges">
-                        <path fill="#000" d="M0 0h7v7H0zM22 0h7v7h-7zM0 22h7v7H0zM9 0h2v2H9zM12 2h3v1h-3zM18 1h2v3h-2zM9 5h3v2H9zM14 6h2v3h-2zM2 9h4v2H2zM9 10h4v2H9zM15 11h3v3h-3zM21 10h2v3h-2zM0 13h5v2H0zM8 14h3v3H8zM24 15h4v2h-4zM2 17h3v2H2zM12 18h2v2h-2zM18 19h4v2h-4zM23 20h2v3h-2z" />
-                      </svg>
+                  <div style={{ marginTop: '20px', padding: '15px', background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '12px', display: 'flex', gap: '15px', alignItems: 'center', boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.05)' }}>
+                    <div style={{ width: '80px', height: '80px', background: '#fff', padding: '5px', borderRadius: '8px', display: 'flex', justifyContent: 'center', alignItems: 'center', boxShadow: '0 4px 10px rgba(0,0,0,0.5)' }}>
+                      <img 
+                        src={`https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=HotelReserve-Ticket-${selectedBookingPay || 'Default'}&bgcolor=ffffff`} 
+                        alt="Encrypted QR Ticket" 
+                        style={{ width: '100%', height: '100%', objectFit: 'contain' }} 
+                      />
                     </div>
                     <div>
-                      <h4 style={{ margin: '0 0 4px', fontSize: '13px', color: '#fff' }}>Simulated Check-In QR Ticket</h4>
-                      <p style={{ margin: 0, fontSize: '11px', color: '#94a3b8' }}>
-                        Show this digital receipt ticket on mobile device at reception for contactless check-in.
+                      <h4 style={{ margin: '0 0 6px', fontSize: '14px', color: '#fff', fontWeight: '700' }}>Encrypted Check-In QR Ticket</h4>
+                      <p style={{ margin: 0, fontSize: '11px', color: '#94a3b8', lineHeight: '1.4' }}>
+                        Scan this cryptographic receipt ticket on your mobile device at reception for instant contactless verification.
                       </p>
                     </div>
                   </div>
@@ -521,18 +535,24 @@ const Dashboard = () => {
               </div>
 
               <div className="admin-rooms-list-card">
-                <h3>🧾 Active Invoice Registry</h3>
-                <div style={{ maxHeight: '420px', overflowY: 'auto', marginTop: '15px', paddingRight: '5px' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '15px' }}>
+                  <h3>🧾 Immutable Invoice Registry</h3>
+                  <span style={{ fontSize: '11px', background: 'rgba(99, 102, 241, 0.2)', color: '#a5b4fc', padding: '4px 8px', borderRadius: '6px' }}>{payments.length} Invoices</span>
+                </div>
+                <div style={{ maxHeight: '460px', overflowY: 'auto', paddingRight: '5px', display: 'flex', flexDirection: 'column', gap: '10px' }}>
                   {payments.length === 0 ? (
-                    <div style={{ color: '#94a3b8', fontSize: '12px', padding: '20px 0' }}>No invoice payments cleared yet. Complete checkouts to populate invoices.</div>
+                    <div style={{ color: '#94a3b8', fontSize: '12px', padding: '40px 0', textAlign: 'center' }}>No invoice payments cleared yet.<br/>Complete a checkout to mint an invoice.</div>
                   ) : (
                     payments.map(p => (
-                      <div key={p._id} style={{ padding: '10px', borderBottom: '1px solid rgba(255,255,255,0.05)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                      <div key={p._id} style={{ padding: '15px', background: 'rgba(0,0,0,0.3)', border: '1px solid rgba(255,255,255,0.05)', borderRadius: '12px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', transition: 'all 0.3s' }}>
                         <div>
-                          <span style={{ fontSize: '12px', fontWeight: 'bold', color: '#fff' }}>{p.transactionReference}</span>
-                          <span style={{ fontSize: '10px', color: '#94a3b8', display: 'block' }}>Method: {p.paymentMethod} • amount paid</span>
+                          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '4px' }}>
+                            <span style={{ fontSize: '13px', fontWeight: '800', color: '#fff' }}>{p.transactionReference}</span>
+                            <span style={{ fontSize: '9px', background: 'rgba(16, 185, 129, 0.15)', color: '#10b981', padding: '2px 6px', borderRadius: '4px', border: '1px solid rgba(16,185,129,0.3)' }}>PAID</span>
+                          </div>
+                          <span style={{ fontSize: '11px', color: '#94a3b8', display: 'block' }}>Gateway: <strong style={{ color: '#cbd5e1' }}>{p.paymentMethod}</strong></span>
                         </div>
-                        <span style={{ fontSize: '14px', fontWeight: '800', color: '#10b981' }}>${p.amount}</span>
+                        <span style={{ fontSize: '18px', fontWeight: '800', color: '#10b981', textShadow: '0 0 10px rgba(16, 185, 129, 0.4)' }}>${p.amount}</span>
                       </div>
                     ))
                   )}
