@@ -68,22 +68,7 @@
   letter-spacing: 0.01em;
 }
 
-.form-group input[type="text"] {
-  padding: 0.75rem 1rem;
-  border: 1px solid var(--border-color);
-  border-radius: 10px;
-  font-size: 14px;
-  color: var(--text-main);
-  background: rgba(0, 0, 0, 0.2);
-  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-  outline: none;
-}
-
-.form-group input[type="text"]:focus {
-  border-color: var(--primary);
-  background: rgba(0, 0, 0, 0.35);
-  box-shadow: 0 0 0 3px var(--primary-glow);
-}
+/* Inherit global input styles from App.css */
 
 .form-hint {
   font-size: 11px;
