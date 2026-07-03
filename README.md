@@ -9,10 +9,22 @@ Featuring an ultra-premium **dark glassmorphic UI**, custom inline vector SVG ic
 
 ---
 
-## 📸 visual Metamorphosis
+## 📸 Application Showcase
 
-- **Luxury Glassmorphism CSS System:** Engineered a variable-based aesthetic framework (`App.css`) with Outift & Plus Jakarta Sans typography, radial-gradient midnight backdrops, and translucent, glowing borders.
-- **Architectural Grid Map:** Real-time visual map representing 97 architectural rooms across 10 floors with interactive, pulsing room state indicators.
+### Dashboard & Operations Core
+![Enterprise Dashboard](./screenshots/dashboard.png)
+*The centralized command center for operations, booking, and user management featuring a premium glassmorphic dark mode aesthetic.*
+
+### Architectural Floor Map
+![Floor Map Visualization](./screenshots/map.png)
+*Real-time visual map representing 97 architectural rooms across 10 floors with interactive, pulsing state indicators (Green: Available, Yellow: Reserved, Red: Occupied).*
+
+### Real-Time Analytics
+![Analytics Hub](./screenshots/analytics.png)
+*Data-driven insights extracted dynamically, showing occupancy percentage, total revenue, and live sentiment distribution.*
+
+### ✨ Design Highlights
+- **Luxury Glassmorphism CSS:** Engineered a variable-based aesthetic framework with Outfit typography, radial-gradient midnight backdrops, and translucent, glowing borders.
 - **Bespoke Inline SVGs:** 100% custom-coded responsive SVG icons, eliminating generic emojis to showcase pristine design fidelity.
 
 ---

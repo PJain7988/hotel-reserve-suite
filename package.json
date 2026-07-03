@@ -1,0 +1,13 @@
+{
+  "name": "hotel-reserve-suite-root",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Root package.json to proxy Render deployments to the backend",
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "scripts": {
+    "postinstall": "cd backend && npm install",
+    "start": "cd backend && npm start"
+  }
+}
