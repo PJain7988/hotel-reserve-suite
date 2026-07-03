@@ -7,8 +7,8 @@ const BookingList = () => {
 
   if (bookings.length === 0) {
     return (
-      <div className="booking-list-card">
-        <h3 className="list-title">Active Bookings</h3>
+      <div className="booking-list-card" style={{ background: 'linear-gradient(145deg, rgba(30,30,40,0.8) 0%, rgba(20,20,30,0.9) 100%)', boxShadow: '0 10px 30px rgba(0,0,0,0.5)', border: '1px solid rgba(255,255,255,0.08)' }}>
+        <h3 className="list-title" style={{ fontSize: '18px', background: 'linear-gradient(135deg, #fff, #a5b4fc)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', textShadow: '0 0 10px rgba(165,180,252,0.3)' }}>Active Bookings</h3>
         <div className="empty-state">
           <div className="empty-icon">
             <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{ color: 'var(--text-muted-dark)', margin: '0 auto' }}>
@@ -25,10 +25,10 @@ const BookingList = () => {
   }
 
   return (
-    <div className="booking-list-card">
-      <h3 className="list-title">
+    <div className="booking-list-card" style={{ background: 'linear-gradient(145deg, rgba(30,30,40,0.8) 0%, rgba(20,20,30,0.9) 100%)', boxShadow: '0 10px 30px rgba(0,0,0,0.5)', border: '1px solid rgba(255,255,255,0.08)' }}>
+      <h3 className="list-title" style={{ fontSize: '18px', background: 'linear-gradient(135deg, #fff, #a5b4fc)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', textShadow: '0 0 10px rgba(165,180,252,0.3)', display: 'flex', alignItems: 'center', gap: '12px' }}>
         Active Bookings
-        <span className="list-count">{bookings.length}</span>
+        <span className="list-count" style={{ background: 'linear-gradient(135deg, #6366f1, #8b5cf6)', color: '#fff', border: 'none', boxShadow: '0 0 10px rgba(139,92,246,0.5)', WebkitTextFillColor: '#fff', textShadow: 'none' }}>{bookings.length}</span>
       </h3>
       <div className="bookings-list">
         {bookings.map(b => (
