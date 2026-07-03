@@ -154,7 +154,7 @@ exports.getAllRooms = async (req, res) => {
 // @route POST /api/bookings
 exports.bookRooms = async (req, res) => {
   try {
-    const { numberOfRooms, guestName, userEmail, isHoliday, preferredFeatures, checkIn, checkOut, specialRequests } = req.body;
+    const { numberOfRooms, guestName, userEmail, isHoliday, preferredFeatures, checkIn, checkOut, specialRequests, roomTier, acPreference } = req.body;
 
     if (!numberOfRooms || numberOfRooms < 1 || numberOfRooms > 5) {
       return res.status(400).json({ success: false, message: 'Number of rooms must be between 1 and 5' });
@@ -174,6 +174,13 @@ exports.bookRooms = async (req, res) => {
 
       const allRooms = memoryDb.getRooms();
       let availableRooms = allRooms.filter(r => r.status === 'Available');
+      
+      if (roomTier && roomTier !== 'Any') {
+        availableRooms = availableRooms.filter(r => r.roomType === roomTier);
+      }
+      if (acPreference === 'AC') {
+        availableRooms = availableRooms.filter(r => r.features?.some(f => f.includes('AC') || f.includes('Air')));
+      }
 
       // Smart Priority Allocation: VIPs get prioritized access to higher floors (floors 7-10)
       if (isVIP) {
@@ -209,12 +216,16 @@ exports.bookRooms = async (req, res) => {
       const occupancyRate = occupiedRoomsCount / 97;
       const demandFactor = 1.0 + (occupancyRate * 0.5) + (isHoliday ? 0.3 : 0.0);
       const basePrice = selectedRooms.reduce((acc, r) => acc + r.price, 0);
-      let totalAmount = Math.round(basePrice * demandFactor);
+      let calculatedBase = Math.round(basePrice * demandFactor);
 
       // Loyalty Discount: VIPs get 10% discount
       if (isVIP) {
-        totalAmount = Math.round(totalAmount * 0.9);
+        calculatedBase = Math.round(calculatedBase * 0.9);
       }
+
+      // GST Calculation (18%)
+      const gstAmount = Math.round(calculatedBase * 0.18);
+      const totalAmount = calculatedBase + gstAmount;
 
       // Mark rooms occupied in memory
       selectedRooms.forEach(sr => {
@@ -231,6 +242,10 @@ exports.bookRooms = async (req, res) => {
         floorsSpanned: floors.length,
         checkIn: checkInDate,
         checkOut: checkOutDate,
+        roomTier: roomTier || 'Any',
+        acPreference: acPreference || 'Any',
+        baseAmount: calculatedBase,
+        gstAmount,
         totalAmount,
         paymentStatus: 'Pending'
       });
@@ -271,8 +286,11 @@ exports.bookRooms = async (req, res) => {
     const isVIP = activeUser && (activeUser.role === 'Admin' || activeUser.membership_level === 'Gold' || activeUser.membership_level === 'Platinum');
 
     let query = { status: 'Available' };
+    if (roomTier && roomTier !== 'Any') query.roomType = roomTier;
+    if (acPreference === 'AC') query.features = { $regex: /AC|Air Conditioning/i };
+
     if (isVIP) {
-      const vipRoomsCount = await Room.countDocuments({ status: 'Available', floor: { $gte: 7 } });
+      const vipRoomsCount = await Room.countDocuments({ ...query, floor: { $gte: 7 } });
       if (vipRoomsCount >= numberOfRooms) {
         query.floor = { $gte: 7 };
       }
@@ -297,9 +315,12 @@ exports.bookRooms = async (req, res) => {
     const occupancyRate = occupiedCount / (totalRoomsCount || 97);
     const demandFactor = 1.0 + (occupancyRate * 0.5) + (isHoliday ? 0.3 : 0.0);
     const basePrice = selectedRooms.reduce((acc, r) => acc + r.price, 0);
-    let totalAmount = Math.round(basePrice * demandFactor);
+    let calculatedBase = Math.round(basePrice * demandFactor);
 
-    if (isVIP) totalAmount = Math.round(totalAmount * 0.9);
+    if (isVIP) calculatedBase = Math.round(calculatedBase * 0.9);
+
+    const gstAmount = Math.round(calculatedBase * 0.18);
+    const totalAmount = calculatedBase + gstAmount;
 
     const booking = await Booking.create({
       guestName: guestName.trim(),
@@ -311,6 +332,10 @@ exports.bookRooms = async (req, res) => {
       floorsSpanned: floors.length,
       checkIn: checkInDate,
       checkOut: checkOutDate,
+      roomTier: roomTier || 'Any',
+      acPreference: acPreference || 'Any',
+      baseAmount: calculatedBase,
+      gstAmount,
       totalAmount,
       paymentStatus: 'Pending'
     });

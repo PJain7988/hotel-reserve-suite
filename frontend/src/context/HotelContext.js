@@ -160,7 +160,7 @@ export const HotelProvider = ({ children }) => {
   };
 
   // Booking operation wrapper supporting features, holiday dynamic mods, and logged email session
-  const bookRooms = useCallback(async (numberOfRooms, guestName, specialRequests) => {
+  const bookRooms = useCallback(async (numberOfRooms, guestName, specialRequests, roomTier = 'Any', acPreference = 'Any') => {
     setLoading(true);
     try {
       const { data } = await bookingsAPI.book({
@@ -169,7 +169,9 @@ export const HotelProvider = ({ children }) => {
         userEmail: user ? user.email : '',
         isHoliday: holidayMod,
         preferredFeatures,
-        specialRequests
+        specialRequests,
+        roomTier,
+        acPreference
       });
       setLastBooked(data.roomNumbers || []);
       toast.success(`Booked ${numberOfRooms} room(s)! Total: $${data.totalAmount}`);

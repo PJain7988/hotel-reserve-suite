@@ -6,13 +6,19 @@ const BookingForm = () => {
   const { bookRooms, randomOccupancy, resetAll, loading, stats } = useHotel();
   const [guestName, setGuestName] = useState('');
   const [numRooms, setNumRooms] = useState(1);
+  const [roomTier, setRoomTier] = useState('Any');
+  const [acPreference, setAcPreference] = useState('Any');
+  const [specialRequests, setSpecialRequests] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!guestName.trim()) return;
-    await bookRooms(Number(numRooms), guestName.trim());
+    await bookRooms(Number(numRooms), guestName.trim(), specialRequests, roomTier, acPreference);
     setGuestName('');
     setNumRooms(1);
+    setRoomTier('Any');
+    setAcPreference('Any');
+    setSpecialRequests('');
   };
 
   return (
@@ -63,6 +69,26 @@ const BookingForm = () => {
             >+</button>
           </div>
           <p className="form-hint">Range: 1 – 5 rooms</p>
+        </div>
+
+        <div className="form-group" style={{ display: 'flex', gap: '10px' }}>
+          <div style={{ flex: 1 }}>
+            <label htmlFor="roomTier">Room Tier</label>
+            <select id="roomTier" value={roomTier} onChange={e => setRoomTier(e.target.value)} style={{ marginTop: '5px' }}>
+              <option value="Any">Any Tier</option>
+              <option value="Standard">Standard</option>
+              <option value="Deluxe">Deluxe</option>
+              <option value="VIP">VIP Suite</option>
+            </select>
+          </div>
+          <div style={{ flex: 1 }}>
+            <label htmlFor="acPreference">AC Preference</label>
+            <select id="acPreference" value={acPreference} onChange={e => setAcPreference(e.target.value)} style={{ marginTop: '5px' }}>
+              <option value="Any">Any Type</option>
+              <option value="AC">Air Conditioned</option>
+              <option value="Non-AC">Non-AC</option>
+            </select>
+          </div>
         </div>
 
         <button

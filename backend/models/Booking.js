@@ -24,6 +24,16 @@ const bookingSchema = new mongoose.Schema({
     min: [1, 'Must book at least 1 room'],
     max: [5, 'Cannot book more than 5 rooms']
   },
+  roomTier: {
+    type: String,
+    enum: ['Any', 'Standard', 'Deluxe', 'Premium', 'Suite'],
+    default: 'Any'
+  },
+  acPreference: {
+    type: String,
+    enum: ['Any', 'AC', 'Non-AC'],
+    default: 'Any'
+  },
   checkIn: {
     type: Date,
     default: Date.now
@@ -44,6 +54,14 @@ const bookingSchema = new mongoose.Schema({
     type: String,
     enum: ['active', 'cancelled', 'completed'],
     default: 'active'
+  },
+  baseAmount: {
+    type: Number,
+    default: 0
+  },
+  gstAmount: {
+    type: Number,
+    default: 0
   },
   totalAmount: {
     type: Number,

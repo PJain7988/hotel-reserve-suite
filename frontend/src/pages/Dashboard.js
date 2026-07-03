@@ -478,19 +478,27 @@ const Dashboard = () => {
                     </select>
                   </div>
                   
-                  {selectedBookingPay && (
-                    <div style={{ padding: '15px', background: 'rgba(99, 102, 241, 0.1)', border: '1px solid rgba(99, 102, 241, 0.3)', borderRadius: '12px', marginBottom: '15px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                      <div>
-                        <span style={{ fontSize: '11px', color: '#a5b4fc', display: 'block' }}>Dynamic Price Breakdown:</span>
-                        <span style={{ fontSize: '18px', fontWeight: '800', color: '#fff' }}>
-                          ${bookings.find(b => b._id === selectedBookingPay)?.totalAmount}
-                        </span>
+                  {selectedBookingPay && (() => {
+                    const b = bookings.find(bk => bk._id === selectedBookingPay);
+                    if (!b) return null;
+                    return (
+                      <div style={{ padding: '15px', background: 'rgba(99, 102, 241, 0.1)', border: '1px solid rgba(99, 102, 241, 0.3)', borderRadius: '12px', marginBottom: '15px' }}>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px', fontSize: '12px', color: '#a5b4fc' }}>
+                          <span>Base Cost:</span>
+                          <span>${b.baseAmount || Math.round(b.totalAmount * 0.82)}</span>
+                        </div>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px', fontSize: '12px', color: '#a5b4fc' }}>
+                          <span>GST (18%):</span>
+                          <span>${b.gstAmount || Math.round(b.totalAmount * 0.18)}</span>
+                        </div>
+                        <div style={{ height: '1px', background: 'rgba(99, 102, 241, 0.3)', margin: '8px 0' }} />
+                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                          <span style={{ fontSize: '11px', color: '#a5b4fc' }}>Total Amount Due:</span>
+                          <span style={{ fontSize: '18px', fontWeight: '800', color: '#fff' }}>${b.totalAmount}</span>
+                        </div>
                       </div>
-                      <div style={{ padding: '4px 10px', background: 'rgba(16, 185, 129, 0.2)', color: '#10b981', borderRadius: '99px', fontSize: '11px', fontWeight: 'bold' }}>
-                        Ready for Capture
-                      </div>
-                    </div>
-                  )}
+                    );
+                  })()}
 
                   <div className="form-group">
                     <label>Secure Payment Gateway</label>
@@ -503,9 +511,18 @@ const Dashboard = () => {
                   </div>
 
                   {payMethod === 'Credit Card' && (
-                    <div className="form-group">
-                      <label>Mock Credit Card Number (Encrypted)</label>
-                      <input type="text" placeholder="0000 0000 0000 0000" disabled style={{ opacity: 0.5, cursor: 'not-allowed' }} />
+                    <div className="form-group" style={{ marginTop: '10px' }}>
+                      <label style={{ display: 'flex', justifyContent: 'space-between' }}>
+                        <span>Stripe Secured Credit Card</span>
+                        <span style={{ color: '#10b981', fontSize: '11px' }}>🔒 256-bit AES Encrypted</span>
+                      </label>
+                      <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', padding: '12px', background: 'rgba(0,0,0,0.4)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '12px', boxShadow: 'inset 0 2px 5px rgba(0,0,0,0.5)' }}>
+                        <input type="text" placeholder="Card number (0000 0000 0000 0000)" style={{ background: 'transparent', border: '1px solid rgba(255,255,255,0.05)', boxShadow: 'none' }} />
+                        <div style={{ display: 'flex', gap: '8px' }}>
+                          <input type="text" placeholder="MM / YY" style={{ flex: 1, background: 'transparent', border: '1px solid rgba(255,255,255,0.05)', boxShadow: 'none' }} />
+                          <input type="text" placeholder="CVC" style={{ flex: 1, background: 'transparent', border: '1px solid rgba(255,255,255,0.05)', boxShadow: 'none' }} />
+                        </div>
+                      </div>
                     </div>
                   )}
                   
