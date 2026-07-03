@@ -600,56 +600,61 @@ const Dashboard = () => {
             
             {analytics ? (
               <div className="analytics-dashboard-grid">
-                <div className="analytics-metrics-row">
-                  <div className="analytic-card">
-                    <h4>Occupancy Percentage</h4>
-                    <span className="metric-val">{analytics.occupancyRate}%</span>
-                    <p>Dynamic price factor adjustments active</p>
+                <div className="analytics-metrics-row" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '20px' }}>
+                  <div className="analytic-card" style={{ background: 'linear-gradient(135deg, rgba(30,30,40,0.8), rgba(20,20,30,0.9))', border: '1px solid rgba(255,255,255,0.05)', borderRadius: '16px', padding: '20px', boxShadow: '0 10px 30px rgba(0,0,0,0.5)', position: 'relative', overflow: 'hidden' }}>
+                    <div style={{ position: 'absolute', top: '-20px', right: '-20px', width: '100px', height: '100px', background: 'radial-gradient(circle, rgba(99,102,241,0.2) 0%, transparent 70%)', borderRadius: '50%' }}></div>
+                    <h4 style={{ color: '#94a3b8', fontSize: '13px', margin: '0 0 10px 0', textTransform: 'uppercase', letterSpacing: '1px' }}>Occupancy Rate</h4>
+                    <span className="metric-val" style={{ fontSize: '32px', fontWeight: '900', color: '#fff', textShadow: '0 0 20px rgba(255,255,255,0.3)', display: 'block' }}>{analytics.occupancyRate}%</span>
+                    <p style={{ color: '#64748b', fontSize: '11px', margin: '10px 0 0 0' }}>Dynamic price factor adjustments active</p>
                   </div>
-                  <div className="analytic-card">
-                    <h4>Total System Revenue</h4>
-                    <span className="metric-val" style={{ color: '#10b981' }}>${analytics.totalRevenue}</span>
-                    <p>From simulated payment collections</p>
+                  <div className="analytic-card" style={{ background: 'linear-gradient(135deg, rgba(30,30,40,0.8), rgba(20,20,30,0.9))', border: '1px solid rgba(255,255,255,0.05)', borderRadius: '16px', padding: '20px', boxShadow: '0 10px 30px rgba(0,0,0,0.5)', position: 'relative', overflow: 'hidden' }}>
+                    <div style={{ position: 'absolute', top: '-20px', right: '-20px', width: '100px', height: '100px', background: 'radial-gradient(circle, rgba(16,185,129,0.2) 0%, transparent 70%)', borderRadius: '50%' }}></div>
+                    <h4 style={{ color: '#94a3b8', fontSize: '13px', margin: '0 0 10px 0', textTransform: 'uppercase', letterSpacing: '1px' }}>Total System Revenue</h4>
+                    <span className="metric-val" style={{ fontSize: '32px', fontWeight: '900', color: '#10b981', textShadow: '0 0 20px rgba(16,185,129,0.4)', display: 'block' }}>${analytics.totalRevenue}</span>
+                    <p style={{ color: '#64748b', fontSize: '11px', margin: '10px 0 0 0' }}>From simulated payment collections</p>
                   </div>
-                  <div className="analytic-card">
-                    <h4>Average Pricing Median</h4>
-                    <span className="metric-val" style={{ color: '#a5b4fc' }}>${analytics.avgPrice}</span>
-                    <p>Average base room cost</p>
+                  <div className="analytic-card" style={{ background: 'linear-gradient(135deg, rgba(30,30,40,0.8), rgba(20,20,30,0.9))', border: '1px solid rgba(255,255,255,0.05)', borderRadius: '16px', padding: '20px', boxShadow: '0 10px 30px rgba(0,0,0,0.5)', position: 'relative', overflow: 'hidden' }}>
+                    <div style={{ position: 'absolute', top: '-20px', right: '-20px', width: '100px', height: '100px', background: 'radial-gradient(circle, rgba(165,180,252,0.2) 0%, transparent 70%)', borderRadius: '50%' }}></div>
+                    <h4 style={{ color: '#94a3b8', fontSize: '13px', margin: '0 0 10px 0', textTransform: 'uppercase', letterSpacing: '1px' }}>Average Pricing Median</h4>
+                    <span className="metric-val" style={{ fontSize: '32px', fontWeight: '900', color: '#a5b4fc', textShadow: '0 0 20px rgba(165,180,252,0.4)', display: 'block' }}>${analytics.avgPrice}</span>
+                    <p style={{ color: '#64748b', fontSize: '11px', margin: '10px 0 0 0' }}>Average base room cost</p>
                   </div>
                 </div>
 
-                <div className="profile-grid" style={{ marginTop: '20px' }}>
-                  <div className="loyalty-points-card">
-                    <h3 style={{ fontSize: '14px', marginBottom: '15px' }}>📈 Room Distribution Tiers</h3>
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                <div className="profile-grid" style={{ marginTop: '25px', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
+                  <div className="loyalty-points-card" style={{ background: 'linear-gradient(145deg, rgba(20,25,35,0.8) 0%, rgba(10,15,25,0.9) 100%)', border: '1px solid rgba(255,255,255,0.05)', borderRadius: '16px', padding: '25px' }}>
+                    <h3 style={{ fontSize: '16px', marginBottom: '20px', color: '#fff', borderBottom: '1px solid rgba(255,255,255,0.1)', paddingBottom: '10px' }}>📈 Room Distribution Tiers</h3>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
                       {Object.entries(analytics.roomTiers).map(([tier, count]) => (
-                        <div key={tier} style={{ fontSize: '12px' }}>
-                          <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '3px' }}>
-                            <span>{tier} Rooms</span>
-                            <span style={{ fontWeight: 'bold' }}>{count}</span>
+                        <div key={tier} style={{ fontSize: '13px' }}>
+                          <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '6px' }}>
+                            <span style={{ color: '#cbd5e1' }}>{tier} Rooms</span>
+                            <span style={{ fontWeight: 'bold', color: '#fff' }}>{count}</span>
                           </div>
-                          <div style={{ height: '6px', background: 'rgba(255,255,255,0.05)', borderRadius: '3px', overflow: 'hidden' }}>
-                            <div style={{ height: '100%', background: '#6366f1', width: `${(count / 97) * 100}%` }}></div>
+                          <div style={{ height: '8px', background: 'rgba(0,0,0,0.5)', borderRadius: '4px', overflow: 'hidden', boxShadow: 'inset 0 1px 3px rgba(0,0,0,0.5)' }}>
+                            <div style={{ height: '100%', background: 'linear-gradient(90deg, #6366f1, #8b5cf6)', width: `${(count / 97) * 100}%`, borderRadius: '4px', boxShadow: '0 0 10px rgba(99,102,241,0.5)' }}></div>
                           </div>
                         </div>
                       ))}
                     </div>
                   </div>
 
-                  <div className="loyalty-points-card">
-                    <h3 style={{ fontSize: '14px', marginBottom: '15px' }}>❤️ Feedback Sentiment Distribution</h3>
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                  <div className="loyalty-points-card" style={{ background: 'linear-gradient(145deg, rgba(20,25,35,0.8) 0%, rgba(10,15,25,0.9) 100%)', border: '1px solid rgba(255,255,255,0.05)', borderRadius: '16px', padding: '25px' }}>
+                    <h3 style={{ fontSize: '16px', marginBottom: '20px', color: '#fff', borderBottom: '1px solid rgba(255,255,255,0.1)', paddingBottom: '10px' }}>❤️ Feedback Sentiment</h3>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
                       {Object.entries(analytics.sentimentBreakdown).map(([sentiment, count]) => (
-                        <div key={sentiment} style={{ fontSize: '12px' }}>
-                          <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '3px' }}>
-                            <span>{sentiment} Sentiment</span>
-                            <span style={{ fontWeight: 'bold' }}>{count}</span>
+                        <div key={sentiment} style={{ fontSize: '13px' }}>
+                          <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '6px' }}>
+                            <span style={{ color: '#cbd5e1' }}>{sentiment} Sentiment</span>
+                            <span style={{ fontWeight: 'bold', color: '#fff' }}>{count}</span>
                           </div>
-                          <div style={{ height: '6px', background: 'rgba(255,255,255,0.05)', borderRadius: '3px', overflow: 'hidden' }}>
+                          <div style={{ height: '8px', background: 'rgba(0,0,0,0.5)', borderRadius: '4px', overflow: 'hidden', boxShadow: 'inset 0 1px 3px rgba(0,0,0,0.5)' }}>
                             <div style={{ 
                               height: '100%', 
-                              background: sentiment === 'Positive' ? '#10b981' : sentiment === 'Negative' ? '#ef4444' : '#fbbf24', 
-                              width: `${(count / (reviews.length || 3)) * 100}%` 
+                              background: sentiment === 'Positive' ? 'linear-gradient(90deg, #10b981, #34d399)' : sentiment === 'Negative' ? 'linear-gradient(90deg, #ef4444, #f87171)' : 'linear-gradient(90deg, #f59e0b, #fbbf24)', 
+                              width: `${(count / (reviews.length || 3)) * 100}%`,
+                              borderRadius: '4px',
+                              boxShadow: sentiment === 'Positive' ? '0 0 10px rgba(16,185,129,0.5)' : sentiment === 'Negative' ? '0 0 10px rgba(239,68,68,0.5)' : '0 0 10px rgba(245,158,11,0.5)'
                             }}></div>
                           </div>
                         </div>
@@ -665,37 +670,39 @@ const Dashboard = () => {
         )}
 
         {activeTab === 'reviews' && (
-          <div className="tab-full-width-card glass-panel">
-            <h2 className="section-title">Customer Feedback Portal & Sentiment Tracker</h2>
-            <p style={{ color: '#94a3b8', fontSize: '13px', marginBottom: '20px' }}>Submit star-ratings and comments. The backend will automatically synthesize and output the customer sentiment breakdown (Positive, Neutral, Negative).</p>
+          <div className="tab-full-width-card glass-panel" style={{ padding: '30px' }}>
+            <h2 className="section-title" style={{ fontSize: '24px', background: 'linear-gradient(135deg, #fff, #a5b4fc)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>Customer Feedback Portal & Sentiment Tracker</h2>
+            <p style={{ color: '#94a3b8', fontSize: '14px', marginBottom: '30px', maxWidth: '800px', lineHeight: '1.6' }}>Submit star-ratings and comments. The backend will automatically synthesize and output the customer sentiment breakdown (Positive, Neutral, Negative).</p>
             
-            <div className="profile-grid">
-              <div className="auth-form-container">
-                <h3>💬 Add Guest Review Feedback</h3>
+            <div className="profile-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '30px' }}>
+              <div className="auth-form-container" style={{ background: 'linear-gradient(145deg, rgba(30,30,40,0.8) 0%, rgba(20,20,30,0.9) 100%)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '16px', padding: '25px', boxShadow: '0 20px 40px rgba(0,0,0,0.6)' }}>
+                <h3 style={{ fontSize: '18px', color: '#fff', marginBottom: '20px', display: 'flex', alignItems: 'center', gap: '8px' }}>💬 Add Guest Review</h3>
                 <form onSubmit={handleReviewSubmit} className="booking-form" style={{ marginTop: '15px' }}>
-                  <div className="form-group">
-                    <label>Guest Name</label>
+                  <div className="form-group" style={{ marginBottom: '15px' }}>
+                    <label style={{ fontSize: '13px', color: '#94a3b8' }}>Guest Name</label>
                     <input 
                       type="text" 
                       placeholder="e.g. Alexis Vance"
                       value={revGuest}
                       onChange={(e) => setRevGuest(e.target.value)}
                       required
+                      style={{ background: 'rgba(0,0,0,0.3)', border: '1px solid rgba(255,255,255,0.08)', padding: '12px', borderRadius: '8px', color: '#fff', width: '100%', outline: 'none', transition: 'border-color 0.3s' }}
                     />
                   </div>
-                  <div className="form-group">
-                    <label>Room Number</label>
+                  <div className="form-group" style={{ marginBottom: '15px' }}>
+                    <label style={{ fontSize: '13px', color: '#94a3b8' }}>Room Number</label>
                     <input 
                       type="number" 
                       placeholder="e.g. 101"
                       value={revRoom}
                       onChange={(e) => setRevRoom(e.target.value)}
                       required
+                      style={{ background: 'rgba(0,0,0,0.3)', border: '1px solid rgba(255,255,255,0.08)', padding: '12px', borderRadius: '8px', color: '#fff', width: '100%', outline: 'none' }}
                     />
                   </div>
-                  <div className="form-group">
-                    <label>Star Rating (1 - 5)</label>
-                    <select value={revRating} onChange={(e) => setRevRating(e.target.value)}>
+                  <div className="form-group" style={{ marginBottom: '15px' }}>
+                    <label style={{ fontSize: '13px', color: '#94a3b8' }}>Star Rating (1 - 5)</label>
+                    <select value={revRating} onChange={(e) => setRevRating(e.target.value)} style={{ background: 'rgba(0,0,0,0.3)', border: '1px solid rgba(255,255,255,0.08)', padding: '12px', borderRadius: '8px', color: '#fff', width: '100%', outline: 'none' }}>
                       <option value="5">⭐⭐⭐⭐⭐ (5 Stars)</option>
                       <option value="4">⭐⭐⭐⭐ (4 Stars)</option>
                       <option value="3">⭐⭐⭐ (3 Stars)</option>
@@ -703,46 +710,47 @@ const Dashboard = () => {
                       <option value="1">⭐ (1 Star)</option>
                     </select>
                   </div>
-                  <div className="form-group">
-                    <label>Comments</label>
+                  <div className="form-group" style={{ marginBottom: '20px' }}>
+                    <label style={{ fontSize: '13px', color: '#94a3b8' }}>Comments</label>
                     <textarea 
                       placeholder="Share your stay experience..."
                       value={revComment}
                       onChange={(e) => setRevComment(e.target.value)}
                       required
-                      style={{ background: 'rgba(0,0,0,0.3)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '8px', padding: '10px', color: '#fff', resize: 'none', height: '80px', fontSize: '13px', width: '100%' }}
+                      style={{ background: 'rgba(0,0,0,0.3)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '8px', padding: '12px', color: '#fff', resize: 'none', height: '100px', fontSize: '13px', width: '100%', outline: 'none' }}
                     />
                   </div>
                   
-                  <button type="submit" className="book-btn">Submit guest feedback</button>
+                  <button type="submit" className="book-btn" style={{ width: '100%', padding: '14px', borderRadius: '8px', background: 'linear-gradient(135deg, #6366f1, #8b5cf6)', color: '#fff', fontWeight: 'bold', border: 'none', cursor: 'pointer', transition: 'transform 0.2s', boxShadow: '0 4px 15px rgba(99,102,241,0.4)' }}>Submit Guest Feedback</button>
                 </form>
               </div>
 
-              <div className="admin-rooms-list-card">
-                <h3>💬 Live Review Registry</h3>
-                <div style={{ maxHeight: '420px', overflowY: 'auto', marginTop: '15px', paddingRight: '5px' }}>
+              <div className="admin-rooms-list-card" style={{ background: 'transparent', border: 'none', boxShadow: 'none', padding: '0' }}>
+                <h3 style={{ fontSize: '18px', color: '#fff', marginBottom: '20px', display: 'flex', alignItems: 'center', gap: '8px' }}>💬 Live Review Registry</h3>
+                <div style={{ maxHeight: '550px', overflowY: 'auto', paddingRight: '10px', display: 'flex', flexDirection: 'column', gap: '15px' }}>
                   {reviews.length === 0 ? (
-                    <div style={{ color: '#94a3b8', fontSize: '12px', padding: '20px 0' }}>No reviews recorded. Be the first to leave a comment!</div>
+                    <div style={{ color: '#94a3b8', fontSize: '14px', padding: '40px 0', textAlign: 'center', background: 'rgba(0,0,0,0.2)', borderRadius: '12px', border: '1px dashed rgba(255,255,255,0.1)' }}>No reviews recorded. Be the first to leave a comment!</div>
                   ) : (
                     reviews.map(r => (
-                      <div key={r._id} style={{ padding: '12px', borderBottom: '1px solid rgba(255,255,255,0.05)', display: 'flex', flexDirection: 'column', gap: '5px' }}>
+                      <div key={r._id} style={{ padding: '20px', background: 'linear-gradient(145deg, rgba(30,30,40,0.7) 0%, rgba(20,20,30,0.8) 100%)', border: '1px solid rgba(255,255,255,0.05)', borderRadius: '16px', display: 'flex', flexDirection: 'column', gap: '10px', transition: 'transform 0.3s, box-shadow 0.3s', cursor: 'default' }} onMouseEnter={e => {e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 10px 20px rgba(0,0,0,0.5)'}} onMouseLeave={e => {e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = 'none'}}>
                         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                          <span style={{ fontSize: '12px', fontWeight: 'bold', color: '#fff' }}>{r.guestName} (Room {r.roomNumber})</span>
+                          <span style={{ fontSize: '15px', fontWeight: '800', color: '#fff' }}>{r.guestName} <span style={{ color: '#94a3b8', fontSize: '12px', fontWeight: 'normal' }}>• Room {r.roomNumber}</span></span>
                           <span 
                             style={{ 
-                              fontSize: '9.5px', 
-                              padding: '2px 8px', 
-                              borderRadius: '4px',
-                              fontWeight: '600',
-                              color: '#fff',
-                              background: r.sentiment === 'Positive' ? '#10b981' : r.sentiment === 'Negative' ? '#ef4444' : '#fbbf24'
+                              fontSize: '10px', 
+                              padding: '4px 10px', 
+                              borderRadius: '99px',
+                              fontWeight: '800',
+                              color: r.sentiment === 'Positive' ? '#10b981' : r.sentiment === 'Negative' ? '#ef4444' : '#fbbf24',
+                              background: r.sentiment === 'Positive' ? 'rgba(16,185,129,0.15)' : r.sentiment === 'Negative' ? 'rgba(239,68,68,0.15)' : 'rgba(245,158,11,0.15)',
+                              border: `1px solid ${r.sentiment === 'Positive' ? 'rgba(16,185,129,0.3)' : r.sentiment === 'Negative' ? 'rgba(239,68,68,0.3)' : 'rgba(245,158,11,0.3)'}`
                             }}
                           >
-                            {r.sentiment}
+                            {r.sentiment.toUpperCase()}
                           </span>
                         </div>
-                        <div style={{ color: '#fbbf24', fontSize: '11px' }}>{'⭐'.repeat(r.rating)}</div>
-                        <p style={{ margin: 0, fontSize: '11.5px', color: '#cbd5e1', lineHeight: '1.4' }}>"{r.comment}"</p>
+                        <div style={{ color: '#fbbf24', fontSize: '14px', letterSpacing: '2px', textShadow: '0 0 10px rgba(251,191,36,0.4)' }}>{'⭐'.repeat(r.rating)}</div>
+                        <p style={{ margin: 0, fontSize: '13px', color: '#cbd5e1', lineHeight: '1.6', fontStyle: 'italic' }}>"{r.comment}"</p>
                       </div>
                     ))
                   )}
